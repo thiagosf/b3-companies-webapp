@@ -1,0 +1,15 @@
+.company-activity {
+  width: 200px;
+}
+
+.sorting {
+  cursor: pointer;
+}
+.sorting_asc {
+  cursor: pointer;
+  background: #FFEBEE;
+}
+.sorting_desc {
+  cursor: pointer;
+  background: #F1F8E9;
+}
