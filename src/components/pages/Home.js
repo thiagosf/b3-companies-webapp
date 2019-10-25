@@ -1,21 +1,46 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Container from 'react-bootstrap/Container'
+import {
+  Container,
+  FormCheck
+} from 'react-bootstrap'
 import { Companies } from '../organisms'
 import { loadCompanies } from '../../store/actions/company'
 import { number } from '../../utils'
 
 class Home extends Component {
+  state = {
+    filters: {
+      evenEmpty: false
+    }
+  };
+
   componentDidMount () {
     this.props.loadCompanies()
   };
 
   render () {
+    const { filters } = this.state
     const data = this._getData()
     return (
       <Container fluid>
         <div className="home">
           <h1>Empresas B3</h1>
+          <div className="home-filters">
+            <label class="form-check">
+              <FormCheck.Input
+                checked={filters.evenEmpty}
+                onChange={event => {
+                  const newFilters = {
+                    ...filters,
+                    evenEmpty: !filters.evenEmpty
+                  }
+                  this.setState({ filters: newFilters })
+                }}
+              />
+              <span>Exibir ações com preço em branco</span>
+            </label>
+          </div>
           <Companies
             data={data}
           />
@@ -25,6 +50,7 @@ class Home extends Component {
   };
 
   _getData = () => {
+    const { evenEmpty } = this.state.filters
     const { list } = this.props.company
     let rows = []
     list.forEach(item => {
@@ -99,6 +125,13 @@ class Home extends Component {
         })
       }
     })
+
+    if (!evenEmpty) {
+      rows = rows.filter(item => {
+        return item.price > 0
+      })
+    }
+
     return {
       showEntries: 1,
       columns: [{

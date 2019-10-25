@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { MDBDataTable } from 'mdbreact';
+import { MDBDataTable } from 'mdbreact'
 
 class Companies extends Component {
   static propTypes = {
@@ -11,6 +11,10 @@ class Companies extends Component {
     const { data } = this.props
     return (
       <MDBDataTable
+        searchLabel='Buscar'
+        entriesLabel='Limitar'
+        paginationLabel={['Anterior', 'Próxima']}
+        infoLabel={['Exibindo', 'até', 'de', 'registros']}
         responsive
         striped
         bordered
