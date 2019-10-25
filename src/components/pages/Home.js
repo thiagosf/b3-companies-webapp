@@ -58,7 +58,7 @@ class Home extends Component {
             </a>
           )
           let price = 0
-          let priceUpdated = null
+          let updated = null
           let dayVariation = 0
           let variation = 0
           let pL = 0
@@ -67,8 +67,8 @@ class Home extends Component {
               price = +aggregate.quote.current
               dayVariation = ((+aggregate.quote.current / +aggregate.quote.open) - 1) * 100
               dayVariation = number.formatPercentage(dayVariation, false)
-              priceUpdated = new Date(+aggregate.quote.updated)
-              priceUpdated = priceUpdated.toLocaleString()
+              updated = new Date(+aggregate.quote.updated)
+              updated = updated.toLocaleString()
             }
             variation = number.formatPercentage(aggregate.quote.variation, false)
           }
@@ -88,10 +88,10 @@ class Home extends Component {
             activity,
             code: aggregate.code,
             price,
-            price_updated: priceUpdated,
             day_variation: dayVariation,
             variation,
             p_l: pL,
+            updated,
             b3link,
             fundamentuslink,
             tradingview
@@ -118,10 +118,6 @@ class Home extends Component {
         field: 'price',
         sort: 'asc'
       }, {
-        label: 'Atualização do preço',
-        field: 'price_updated',
-        sort: 'asc'
-      }, {
         label: 'Variação dia',
         field: 'day_variation',
         sort: 'asc'
@@ -132,6 +128,10 @@ class Home extends Component {
       }, {
         label: 'P/L',
         field: 'p_l',
+        sort: 'asc'
+      }, {
+        label: 'Atualização',
+        field: 'updated',
         sort: 'asc'
       }, {
         label: 'B3',
