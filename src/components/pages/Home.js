@@ -60,7 +60,7 @@ class Home extends Component {
             <a
               target='_blank'
               rel='noopener noreferrer'
-              href={`http://bvmf.bmfbovespa.com.br/cias-listadas/empresas-listadas/ResumoEmpresaPrincipal.aspx?codigoCvm=${item.code}&idioma=pt-br`}
+              href={`http://bvmf.bmfbovespa.com.br/cias-listadas/empresas-listadas/ResumoEmpresaPrincipal.aspx?codigoCvm=${item.id}&idioma=pt-br`}
             >
               view
             </a>
