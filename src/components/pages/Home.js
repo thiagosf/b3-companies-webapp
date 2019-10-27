@@ -21,13 +21,14 @@ class Home extends Component {
 
   render () {
     const { filters } = this.state
+    const { sending } = this.props.company
     const data = this._getData()
     return (
       <Container fluid>
         <div className="home">
-          <h1>Empresas B3</h1>
+          <h1 className="home__title">Empresas B3</h1>
           <div className="home-filters">
-            <label class="form-check">
+            <label className="form-check">
               <FormCheck.Input
                 checked={filters.evenEmpty}
                 onChange={event => {
@@ -41,9 +42,14 @@ class Home extends Component {
               <span>Exibir ações com preço em branco</span>
             </label>
           </div>
-          <Companies
-            data={data}
-          />
+          {sending &&
+            <p>Carregando...</p>
+          }
+          {!sending &&
+            <Companies
+              data={data}
+            />
+          }
         </div>
       </Container>
     )
@@ -93,10 +99,16 @@ class Home extends Component {
               price = +aggregate.quote.current
               dayVariation = ((+aggregate.quote.current / +aggregate.quote.open) - 1) * 100
               dayVariation = number.formatPercentage(dayVariation, false)
+              // dayVariation = (
+              //   <span className={this._getPositiveNegativeClass(dayVariation)}>{dayVariation}</span>
+              // )
               updated = new Date(+aggregate.quote.updated)
               updated = updated.toLocaleString()
             }
             variation = number.formatPercentage(aggregate.quote.variation, false)
+            // variation = (
+            //   <span className={this._getPositiveNegativeClass(variation)}>{variation}</span>
+            // )
           }
           if (
             aggregate.fundamentus &&
@@ -180,6 +192,14 @@ class Home extends Component {
         sort: 'asc'
       }],
       rows
+    }
+  };
+
+  _getPositiveNegativeClass = value => {
+    if (+value > 0) {
+      return 'positive'
+    } else if (+value < 0) {
+      return 'negative'
     }
   };
 }

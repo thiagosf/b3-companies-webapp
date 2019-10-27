@@ -17,7 +17,6 @@ class Companies extends Component {
         infoLabel={['Exibindo', 'até', 'de', 'registros']}
         responsive
         striped
-        bordered
         small
         data={data}
       />

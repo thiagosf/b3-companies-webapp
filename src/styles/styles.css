@@ -13,3 +13,31 @@
   cursor: pointer;
   background: #F1F8E9;
 }
+
+.home-filters .form-check {
+  display: inline-block;
+}
+
+.home__title {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 26px;
+  margin: 20px 0;
+  color: #007bff;
+}
+
+.pagination {
+  flex-direction: column;
+}
+@media (min-width: 768px) {
+  .pagination {
+    flex-direction: row;
+  }
+}
+
+.positive {
+  color: #8BC34A;
+}
+.negative {
+  color: #F44336;
+}
