@@ -41,3 +41,8 @@
 .negative {
   color: #F44336;
 }
+
+.company-chart img {
+  width: 200px;
+  display: block;
+}

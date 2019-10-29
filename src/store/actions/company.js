@@ -5,7 +5,7 @@ const identifier = 'company'
 export const loadCompanies = () => {
   return dispatch => {
     dispatch({ type: 'BEFORE_SEND', identifier })
-    api.get('companies').then(result => {
+    api.get('/companies').then(result => {
       let data = []
       if (result.success) {
         data = result.data

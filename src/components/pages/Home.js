@@ -6,7 +6,7 @@ import {
 } from 'react-bootstrap'
 import { Companies } from '../organisms'
 import { loadCompanies } from '../../store/actions/company'
-import { number } from '../../utils'
+import { number, api } from '../../utils'
 
 class Home extends Component {
   state = {
@@ -68,7 +68,7 @@ class Home extends Component {
               rel='noopener noreferrer'
               href={`http://bvmf.bmfbovespa.com.br/cias-listadas/empresas-listadas/ResumoEmpresaPrincipal.aspx?codigoCvm=${item.id}&idioma=pt-br`}
             >
-              view
+              b3
             </a>
           )
           const fundamentuslink = (
@@ -77,7 +77,7 @@ class Home extends Component {
               rel='noopener noreferrer'
               href={`https://www.fundamentus.com.br/detalhes.php?papel=${aggregate.code}`}
             >
-              view
+              fundamentus
             </a>
           )
           const tradingview = (
@@ -86,7 +86,7 @@ class Home extends Component {
               rel='noopener noreferrer'
               href={`https://br.tradingview.com/chart/?symbol=BMFBOVESPA:${aggregate.code}`}
             >
-              view
+              tradingView
             </a>
           )
           let price = 0
@@ -121,6 +121,24 @@ class Home extends Component {
               {item.activity}
             </div>
           )
+          const links = (
+            <div className="company-links">
+              {b3link}
+              <br />
+              {fundamentuslink}
+              <br />
+              {tradingview}
+            </div>
+          )
+          let chart = null
+          if (aggregate.screenshot) {
+            const fullScreenshot = `${api.getURL()}${aggregate.screenshot}`
+            chart = (
+              <div className="company-chart">
+                <img src={fullScreenshot} alg={`Gráfico ${aggregate.code}`} />
+              </div>
+            )
+          }
           rows.push({
             company: item.name,
             activity,
@@ -130,9 +148,8 @@ class Home extends Component {
             variation,
             p_l: pL,
             updated,
-            b3link,
-            fundamentuslink,
-            tradingview
+            chart,
+            links
           })
         })
       }
@@ -179,16 +196,12 @@ class Home extends Component {
         field: 'updated',
         sort: 'asc'
       }, {
-        label: 'B3',
-        field: 'b3link',
+        label: 'Gráfico dia anterior',
+        field: 'chart',
         sort: 'asc'
       }, {
-        label: 'Fundamentus',
-        field: 'fundamentuslink',
-        sort: 'asc'
-      }, {
-        label: 'TradingView',
-        field: 'tradingview',
+        label: 'Links',
+        field: 'links',
         sort: 'asc'
       }],
       rows
