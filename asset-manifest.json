@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/b3-companies-webapp/static/css/main.944ffe4c.chunk.css",
+    "main.css": "/b3-companies-webapp/static/css/main.d3ecf099.chunk.css",
     "main.js": "/b3-companies-webapp/static/js/main.526cbb82.chunk.js",
     "main.js.map": "/b3-companies-webapp/static/js/main.526cbb82.chunk.js.map",
     "runtime-main.js": "/b3-companies-webapp/static/js/runtime-main.1da1c6a6.js",
@@ -9,16 +9,16 @@
     "static/js/2.0ce24377.chunk.js": "/b3-companies-webapp/static/js/2.0ce24377.chunk.js",
     "static/js/2.0ce24377.chunk.js.map": "/b3-companies-webapp/static/js/2.0ce24377.chunk.js.map",
     "index.html": "/b3-companies-webapp/index.html",
-    "precache-manifest.d6e2d8fe48e0361a5aa47a602baf7cac.js": "/b3-companies-webapp/precache-manifest.d6e2d8fe48e0361a5aa47a602baf7cac.js",
+    "precache-manifest.e74845c313a8a82558e2d780d5db4cb5.js": "/b3-companies-webapp/precache-manifest.e74845c313a8a82558e2d780d5db4cb5.js",
     "service-worker.js": "/b3-companies-webapp/service-worker.js",
     "static/css/2.0624914a.chunk.css.map": "/b3-companies-webapp/static/css/2.0624914a.chunk.css.map",
-    "static/css/main.944ffe4c.chunk.css.map": "/b3-companies-webapp/static/css/main.944ffe4c.chunk.css.map"
+    "static/css/main.d3ecf099.chunk.css.map": "/b3-companies-webapp/static/css/main.d3ecf099.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.1da1c6a6.js",
     "static/css/2.0624914a.chunk.css",
     "static/js/2.0ce24377.chunk.js",
-    "static/css/main.944ffe4c.chunk.css",
+    "static/css/main.d3ecf099.chunk.css",
     "static/js/main.526cbb82.chunk.js"
   ]
 }
