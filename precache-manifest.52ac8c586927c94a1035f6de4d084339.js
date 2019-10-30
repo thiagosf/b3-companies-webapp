@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7c16f1b77f120731cad9bc037bf72d1a",
+    "revision": "6f485a9dc1809e951c61215c17f22ec1",
     "url": "/b3-companies-webapp/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/b3-companies-webapp/static/css/2.0624914a.chunk.css"
   },
   {
-    "revision": "ecd23fcfec777b3e027b",
+    "revision": "9c301c11906511bcd792",
     "url": "/b3-companies-webapp/static/css/main.d3ecf099.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/b3-companies-webapp/static/js/2.0ce24377.chunk.js"
   },
   {
-    "revision": "ecd23fcfec777b3e027b",
-    "url": "/b3-companies-webapp/static/js/main.526cbb82.chunk.js"
+    "revision": "9c301c11906511bcd792",
+    "url": "/b3-companies-webapp/static/js/main.1b7d55b8.chunk.js"
   },
   {
     "revision": "ff5ed64e06c3f889881a",
