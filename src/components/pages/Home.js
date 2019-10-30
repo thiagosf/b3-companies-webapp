@@ -133,9 +133,15 @@ class Home extends Component {
           let chart = null
           if (aggregate.screenshot) {
             const fullScreenshot = `${api.getURL()}${aggregate.screenshot}`
+            let screenshotDate = new Date(+aggregate.screenshot_date)
+            screenshotDate = screenshotDate.toLocaleString()
             chart = (
               <div className="company-chart">
-                <img src={fullScreenshot} alg={`Gráfico ${aggregate.code}`} />
+                <img
+                  src={fullScreenshot}
+                  alt={`Data do screenshot: ${screenshotDate}`}
+                  title={`Data do screenshot: ${screenshotDate}`}
+                />
               </div>
             )
           }
