@@ -94,6 +94,7 @@ class Home extends Component {
           let dayVariation = 0
           let variation = 0
           let pL = 0
+          let pVp = 0
           if (aggregate.quote) {
             if (aggregate.quote.current) {
               price = +aggregate.quote.current
@@ -115,12 +116,9 @@ class Home extends Component {
             aggregate.fundamentus.indicators
           ) {
             pL = +aggregate.fundamentus.indicators.p_l
+            pVp = +aggregate.fundamentus.indicators.p_vp
           }
-          const activity = (
-            <div className="company-activity">
-              {item.activity}
-            </div>
-          )
+          const activity = item.activity
           const links = (
             <div className="company-links">
               {b3link}
@@ -153,6 +151,7 @@ class Home extends Component {
             day_variation: dayVariation,
             variation,
             p_l: pL,
+            p_vp: pVp,
             updated,
             chart,
             links
@@ -176,7 +175,8 @@ class Home extends Component {
       }, {
         label: 'Atividade',
         field: 'activity',
-        sort: 'asc'
+        sort: 'asc',
+        width: 100
       }, {
         label: 'Símbolo',
         field: 'code',
@@ -196,6 +196,10 @@ class Home extends Component {
       }, {
         label: 'P/L',
         field: 'p_l',
+        sort: 'asc'
+      }, {
+        label: 'P/VP',
+        field: 'p_vp',
         sort: 'asc'
       }, {
         label: 'Atualização',
