@@ -118,7 +118,6 @@ class Home extends Component {
             pL = +aggregate.fundamentus.indicators.p_l
             pVp = +aggregate.fundamentus.indicators.p_vp
           }
-          const activity = item.activity
           const links = (
             <div className="company-links">
               {b3link}
@@ -145,7 +144,7 @@ class Home extends Component {
           }
           rows.push({
             company: item.name,
-            activity,
+            activity: item.activity,
             code: aggregate.code,
             price,
             day_variation: dayVariation,
