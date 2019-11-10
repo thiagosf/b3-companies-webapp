@@ -174,8 +174,7 @@ class Home extends Component {
       }, {
         label: 'Atividade',
         field: 'activity',
-        sort: 'asc',
-        width: 100
+        sort: 'asc'
       }, {
         label: 'Símbolo',
         field: 'code',
