@@ -11,13 +11,14 @@ import { number, api } from '../../utils'
 class Home extends Component {
   state = {
     filters: {
-      evenEmpty: false
+      evenEmpty: false,
+      justThreeFour: true
     }
-  };
+  }
 
   componentDidMount () {
     this.props.loadCompanies()
-  };
+  }
 
   render () {
     const { filters } = this.state
@@ -28,19 +29,26 @@ class Home extends Component {
         <div className="home">
           <h1 className="home__title">Empresas B3</h1>
           <div className="home-filters">
-            <label className="form-check">
-              <FormCheck.Input
-                checked={filters.evenEmpty}
-                onChange={event => {
-                  const newFilters = {
-                    ...filters,
-                    evenEmpty: !filters.evenEmpty
-                  }
-                  this.setState({ filters: newFilters })
-                }}
-              />
-              <span>Exibir ações com preço em branco</span>
-            </label>
+            <div className="row">
+              <div className="col-6">
+                <label className="form-check">
+                  <FormCheck.Input
+                    checked={filters.evenEmpty}
+                    onChange={() => this._toggleFilter('evenEmpty')}
+                  />
+                  <span>Exibir ações com preço em branco</span>
+                </label>
+              </div>
+              <div className="col-6">
+                <label className="form-check">
+                  <FormCheck.Input
+                    checked={filters.justThreeFour}
+                    onChange={() => this._toggleFilter('justThreeFour')}
+                  />
+                  <span>Apenas com final 3 e 4</span>
+                </label>
+              </div>
+            </div>
           </div>
           {sending &&
             <p>Carregando...</p>
@@ -53,10 +61,10 @@ class Home extends Component {
         </div>
       </Container>
     )
-  };
+  }
 
   _getData = () => {
-    const { evenEmpty } = this.state.filters
+    const { evenEmpty, justThreeFour } = this.state.filters
     const { list } = this.props.company
     let rows = []
     list.forEach(item => {
@@ -165,6 +173,15 @@ class Home extends Component {
       })
     }
 
+    if (justThreeFour) {
+      rows = rows.filter(item => {
+        return (
+          item.code.endsWith('3') ||
+          item.code.endsWith('4')
+        )
+      })
+    }
+
     return {
       showEntries: 1,
       columns: [{
@@ -214,7 +231,7 @@ class Home extends Component {
       }],
       rows
     }
-  };
+  }
 
   _getPositiveNegativeClass = value => {
     if (+value > 0) {
@@ -222,7 +239,16 @@ class Home extends Component {
     } else if (+value < 0) {
       return 'negative'
     }
-  };
+  }
+
+  _toggleFilter = name => {
+    const { filters } = this.state
+    const newFilters = {
+      ...filters,
+      [name]: !filters[name]
+    }
+    this.setState({ filters: newFilters })
+  }
 }
 
 const mapStateToProps = (state) => {
