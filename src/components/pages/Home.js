@@ -68,103 +68,86 @@ class Home extends Component {
     const { list } = this.props.company
     let rows = []
     list.forEach(item => {
-      if (item.aggregate) {
-        item.aggregate.forEach(aggregate => {
-          const b3link = (
-            <a
-              target='_blank'
-              rel='noopener noreferrer'
-              href={`http://bvmf.bmfbovespa.com.br/cias-listadas/empresas-listadas/ResumoEmpresaPrincipal.aspx?codigoCvm=${item.id}&idioma=pt-br`}
-            >
-              b3
-            </a>
-          )
-          const fundamentuslink = (
-            <a
-              target='_blank'
-              rel='noopener noreferrer'
-              href={`https://www.fundamentus.com.br/detalhes.php?papel=${aggregate.code}`}
-            >
-              fundamentus
-            </a>
-          )
-          const tradingview = (
-            <a
-              target='_blank'
-              rel='noopener noreferrer'
-              href={`https://br.tradingview.com/chart/?symbol=BMFBOVESPA:${aggregate.code}`}
-            >
-              tradingView
-            </a>
-          )
-          let price = 0
-          let updated = null
-          let dayVariation = 0
-          let variation = 0
-          let pL = 0
-          let pVp = 0
-          if (aggregate.quote) {
-            if (aggregate.quote.current) {
-              price = +aggregate.quote.current
-              dayVariation = ((+aggregate.quote.current / +aggregate.quote.open) - 1) * 100
-              dayVariation = number.formatPercentage(dayVariation, false)
-              // dayVariation = (
-              //   <span className={this._getPositiveNegativeClass(dayVariation)}>{dayVariation}</span>
-              // )
-              updated = new Date(+aggregate.quote.updated)
-              updated = updated.toLocaleString()
-            }
-            variation = number.formatPercentage(aggregate.quote.variation, false)
-            // variation = (
-            //   <span className={this._getPositiveNegativeClass(variation)}>{variation}</span>
-            // )
-          }
-          if (
-            aggregate.fundamentus &&
-            aggregate.fundamentus.indicators
-          ) {
-            pL = +aggregate.fundamentus.indicators.p_l
-            pVp = +aggregate.fundamentus.indicators.p_vp
-          }
-          const links = (
-            <div className="company-links">
-              {b3link}
-              <br />
-              {fundamentuslink}
-              <br />
-              {tradingview}
-            </div>
-          )
-          let chart = null
-          if (aggregate.screenshot) {
-            const fullScreenshot = `${api.getURL()}${aggregate.screenshot}`
-            let screenshotDate = new Date(+aggregate.screenshot_date)
-            screenshotDate = screenshotDate.toLocaleString()
-            chart = (
-              <div className="company-chart">
-                <img
-                  src={fullScreenshot}
-                  alt={`Data do screenshot: ${screenshotDate}`}
-                  title={`Data do screenshot: ${screenshotDate}`}
-                />
-              </div>
-            )
-          }
-          rows.push({
-            company: item.name,
-            activity: item.activity,
-            code: aggregate.code,
-            price,
-            day_variation: dayVariation,
-            variation,
-            p_l: pL,
-            p_vp: pVp,
-            updated,
-            chart,
-            links
-          })
-        })
+      const b3link = (
+        <a
+          target='_blank'
+          rel='noopener noreferrer'
+          href={`http://bvmf.bmfbovespa.com.br/cias-listadas/empresas-listadas/BuscaEmpresaListada.aspx?Nome=${item.code}&idioma=pt-br`}
+        >
+          b3
+        </a>
+      )
+      const fundamentuslink = (
+        <a
+          target='_blank'
+          rel='noopener noreferrer'
+          href={`https://www.fundamentus.com.br/detalhes.php?papel=${item.code}`}
+        >
+          fundamentus
+        </a>
+      )
+      const tradingview = (
+        <a
+          target='_blank'
+          rel='noopener noreferrer'
+          href={`https://br.tradingview.com/chart/?symbol=BMFBOVESPA:${item.code}`}
+        >
+          tradingView
+        </a>
+      )
+      let updated = null
+      let dayVariation = 0
+      let variation = 0
+      let pL = +item.p_l
+      let pVp = +item.p_vp
+      let price = +item.price
+      let open = +item.open
+      if (item.price) {
+        dayVariation = ((price / open) - 1) * 100
+        dayVariation = number.formatPercentage(dayVariation, false)
+        if (item.last_candle) {
+          variation = ((price / +item.last_candle.close) - 1) * 100
+          variation = number.formatPercentage(variation, false)
+          updated = new Date(item.updated_at)
+          updated = updated.toLocaleString()
+        }
       }
+      const links = (
+        <div className="company-links">
+          {b3link}
+          <br />
+          {fundamentuslink}
+          <br />
+          {tradingview}
+        </div>
+      )
+      let chart = null
+      if (item.screenshot && item.screenshot.url) {
+        const fullScreenshot = `${api.getURL()}${item.screenshot.url}`
+        let screenshotDate = new Date(+item.screenshot.date)
+        screenshotDate = screenshotDate.toLocaleString()
+        chart = (
+          <div className="company-chart">
+            <img
+              src={fullScreenshot}
+              alt={`Data do screenshot: ${screenshotDate}`}
+              title={`Data do screenshot: ${screenshotDate}`}
+            />
+          </div>
+        )
+      }
+      rows.push({
+        company: item.name,
+        code: item.code,
+        price,
+        day_variation: dayVariation,
+        variation,
+        p_l: pL,
+        p_vp: pVp,
+        updated,
+        chart,
+        links
+      })
     })
 
     if (!evenEmpty) {
@@ -187,10 +170,6 @@ class Home extends Component {
       columns: [{
         label: 'Empresa',
         field: 'company',
-        sort: 'asc'
-      }, {
-        label: 'Atividade',
-        field: 'activity',
         sort: 'asc'
       }, {
         label: 'Símbolo',
