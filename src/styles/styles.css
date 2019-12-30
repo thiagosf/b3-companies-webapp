@@ -50,3 +50,57 @@
 .dataTable tbody tr td:nth-child(2) {
   width: 200px;
 }
+
+.candle {
+  padding: 10px;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  border-radius: 3px;
+  position: relative;
+  border: 2px solid black;
+}
+.candle::after,
+.candle::before {
+  content: "";
+  width: 2px;
+  height: 10px;
+  background: black;
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.candle::before {
+  top: auto;
+  bottom: -10px;
+}
+.candle--positive {
+  background-color: #8BC34A;
+}
+.candle--negative {
+  background-color: #F44336;
+}
+
+.filter-candles {
+  margin: 0 0 20px 0;
+  padding: 20px;
+  background: #eee;
+  border-radius: 4px;
+}
+.filter-candles--list {
+  margin: 0 -5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.filter-candles--list > * {
+  margin: 10px 5px;
+}
+.filter-candles--actions {
+  margin: 10px -2px 10px -2px;
+}
+.filter-candles--actions > * {
+  margin: 0 2px;
+}

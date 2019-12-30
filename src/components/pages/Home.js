@@ -4,7 +4,7 @@ import {
   Container,
   FormCheck
 } from 'react-bootstrap'
-import { Companies } from '../organisms'
+import { Companies, FilterCandles } from '../organisms'
 import { loadCompanies } from '../../store/actions/company'
 import { number, api } from '../../utils'
 
@@ -12,12 +12,13 @@ class Home extends Component {
   state = {
     filters: {
       evenEmpty: false,
-      justThreeFour: true
+      justThreeFour: true,
+      candles: []
     }
   }
 
   componentDidMount () {
-    this.props.loadCompanies()
+    this._loadData()
   }
 
   render () {
@@ -47,6 +48,11 @@ class Home extends Component {
                   />
                   <span>Apenas com final 3 e 4</span>
                 </label>
+              </div>
+              <div className="col-12">
+                <FilterCandles
+                  onChange={this._onChangeCandles}
+                />
               </div>
             </div>
           </div>
@@ -228,6 +234,24 @@ class Home extends Component {
     }
     this.setState({ filters: newFilters })
   }
+
+  _onChangeCandles = value => {
+    const { filters } = this.state
+    const newFilters = {
+      ...filters,
+      candles: value
+    }
+    this.setState({ filters: newFilters }, this._loadData)
+  }
+
+  _loadData = () => {
+    const filters = {
+      candles: this.state.filters.candles.map(item => {
+        return item[0]
+      }).join(',')
+    }
+    this.props.loadCompanies(filters)
+  }
 }
 
 const mapStateToProps = (state) => {
@@ -238,7 +262,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadCompanies: () => dispatch(loadCompanies())
+    loadCompanies: filters => dispatch(loadCompanies(filters))
   }
 }
 
