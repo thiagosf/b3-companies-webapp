@@ -1,6 +1,7 @@
 const initialState = {
   list: [],
-  sending: false
+  sending: false,
+  activities: [],
 }
 
 const identifier = 'company'
@@ -23,6 +24,13 @@ export default (state = initialState, action) => {
 
     case 'SET_COMPANIES':
       nextState.list = action.data
+      if (nextState.activities.length === 0) {
+        nextState.activities = [...new Set(
+          action.data
+            .map(item => item.activity)
+            .filter(item => item)
+        )].sort((a, b) => a > b)
+      }
       break
 
     default:

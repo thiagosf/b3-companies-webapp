@@ -13,7 +13,8 @@ class Home extends Component {
     filters: {
       evenEmpty: false,
       justThreeFour: true,
-      candles: []
+      candles: [],
+      activity: ''
     }
   }
 
@@ -23,7 +24,7 @@ class Home extends Component {
 
   render () {
     const { filters } = this.state
-    const { sending } = this.props.company
+    const { sending, activities } = this.props.company
     const data = this._getData()
     return (
       <Container fluid>
@@ -49,10 +50,24 @@ class Home extends Component {
                   <span>Apenas com final 3 e 4</span>
                 </label>
               </div>
-              <div className="col-12">
+              <div className="col-sm-12 col-md-8">
                 <FilterCandles
                   onChange={this._onChangeCandles}
                 />
+              </div>
+              <div className="col-sm-12 col-md-4">
+                <label>Filtre pela atividade</label>
+                <select
+                  className="form-control"
+                  onChange={this._onChangeActivity}
+                >
+                  <option value=''>Todas</option>
+                  {activities.map((value, index) => {
+                    return (
+                      <option key={index}>{value}</option>
+                    )
+                  })}
+                </select>
               </div>
             </div>
           </div>
@@ -70,7 +85,7 @@ class Home extends Component {
   }
 
   _getData = () => {
-    const { evenEmpty, justThreeFour } = this.state.filters
+    const { evenEmpty, justThreeFour, activity } = this.state.filters
     const { list } = this.props.company
     let rows = []
     list.forEach(item => {
@@ -152,7 +167,8 @@ class Home extends Component {
         p_vp: pVp,
         updated,
         chart,
-        links
+        links,
+        activity: item.activity
       })
     })
 
@@ -170,6 +186,18 @@ class Home extends Component {
         )
       })
     }
+
+    if (activity) {
+      rows = rows.filter(item => {
+        return item.activity === activity
+      })
+    }
+
+    rows = rows.map(item => {
+      const newRow = { ...item }
+      delete newRow.activity
+      return newRow
+    })
 
     return {
       showEntries: 1,
@@ -251,6 +279,13 @@ class Home extends Component {
       }).join(',')
     }
     this.props.loadCompanies(filters)
+  }
+
+  _onChangeActivity = event => {
+    const activity = event.target.value
+    const { filters } = this.state
+    const newFilters = { ...filters, activity }
+    this.setState({ filters: newFilters })
   }
 }
 
