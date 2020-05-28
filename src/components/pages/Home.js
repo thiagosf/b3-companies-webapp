@@ -143,14 +143,36 @@ class Home extends Component {
         </div>
       )
       let chart = null
+      let chartWeekly = null
+      let chartMonthly = null
       if (item.screenshot && item.screenshot.url) {
         const fullScreenshot = `${api.getURL()}${item.screenshot.url}`
+        const fullScreenshotWeekly = `${api.getURL()}${item.screenshot.url_weekly}`
+        const fullScreenshotMonthly = `${api.getURL()}${item.screenshot.url_monthly}`
         let screenshotDate = new Date(+item.screenshot.date)
         screenshotDate = screenshotDate.toLocaleString()
         chart = (
           <div className="company-chart">
             <img
               src={fullScreenshot}
+              alt={`Data do screenshot: ${screenshotDate}`}
+              title={`Data do screenshot: ${screenshotDate}`}
+            />
+          </div>
+        )
+        chartWeekly = (
+          <div className="company-chart">
+            <img
+              src={fullScreenshotWeekly}
+              alt={`Data do screenshot: ${screenshotDate}`}
+              title={`Data do screenshot: ${screenshotDate}`}
+            />
+          </div>
+        )
+        chartMonthly = (
+          <div className="company-chart">
+            <img
+              src={fullScreenshotMonthly}
               alt={`Data do screenshot: ${screenshotDate}`}
               title={`Data do screenshot: ${screenshotDate}`}
             />
@@ -167,6 +189,8 @@ class Home extends Component {
         p_vp: pVp,
         updated,
         chart,
+        chartWeekly,
+        chartMonthly,
         links,
         activity: item.activity
       })
@@ -234,8 +258,16 @@ class Home extends Component {
         field: 'updated',
         sort: 'asc'
       }, {
-        label: 'Gráfico dia anterior',
+        label: 'Gráfico diário',
         field: 'chart',
+        sort: 'asc'
+      }, {
+        label: 'Gráfico semanal',
+        field: 'chart_weekly',
+        sort: 'asc'
+      }, {
+        label: 'Gráfico mensal',
+        field: 'chart_monthly',
         sort: 'asc'
       }, {
         label: 'Links',
