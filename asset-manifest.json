@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/b3-companies-webapp/static/css/main.6d6776ba.chunk.css",
-    "main.js": "/b3-companies-webapp/static/js/main.dd77ec1d.chunk.js",
-    "main.js.map": "/b3-companies-webapp/static/js/main.dd77ec1d.chunk.js.map",
+    "main.css": "/b3-companies-webapp/static/css/main.339ceff4.chunk.css",
+    "main.js": "/b3-companies-webapp/static/js/main.e64ece91.chunk.js",
+    "main.js.map": "/b3-companies-webapp/static/js/main.e64ece91.chunk.js.map",
     "runtime-main.js": "/b3-companies-webapp/static/js/runtime-main.1da1c6a6.js",
     "runtime-main.js.map": "/b3-companies-webapp/static/js/runtime-main.1da1c6a6.js.map",
     "static/css/2.0624914a.chunk.css": "/b3-companies-webapp/static/css/2.0624914a.chunk.css",
     "static/js/2.084b883b.chunk.js": "/b3-companies-webapp/static/js/2.084b883b.chunk.js",
     "static/js/2.084b883b.chunk.js.map": "/b3-companies-webapp/static/js/2.084b883b.chunk.js.map",
     "index.html": "/b3-companies-webapp/index.html",
-    "precache-manifest.bba0368121bcb18bda326564d2809e5e.js": "/b3-companies-webapp/precache-manifest.bba0368121bcb18bda326564d2809e5e.js",
+    "precache-manifest.569bffd8d0181efb8bcbaba5a6b9a01b.js": "/b3-companies-webapp/precache-manifest.569bffd8d0181efb8bcbaba5a6b9a01b.js",
     "service-worker.js": "/b3-companies-webapp/service-worker.js",
     "static/css/2.0624914a.chunk.css.map": "/b3-companies-webapp/static/css/2.0624914a.chunk.css.map",
-    "static/css/main.6d6776ba.chunk.css.map": "/b3-companies-webapp/static/css/main.6d6776ba.chunk.css.map"
+    "static/css/main.339ceff4.chunk.css.map": "/b3-companies-webapp/static/css/main.339ceff4.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.1da1c6a6.js",
     "static/css/2.0624914a.chunk.css",
     "static/js/2.084b883b.chunk.js",
-    "static/css/main.6d6776ba.chunk.css",
-    "static/js/main.dd77ec1d.chunk.js"
+    "static/css/main.339ceff4.chunk.css",
+    "static/js/main.e64ece91.chunk.js"
   ]
 }
