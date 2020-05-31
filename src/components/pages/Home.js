@@ -14,7 +14,8 @@ class Home extends Component {
       evenEmpty: false,
       justThreeFour: true,
       candles: [],
-      activity: ''
+      activity: '',
+      showCharts: true
     }
   }
 
@@ -32,7 +33,7 @@ class Home extends Component {
           <h1 className="home__title">Empresas B3</h1>
           <div className="home-filters">
             <div className="row">
-              <div className="col-6">
+              <div className="col-4">
                 <label className="form-check">
                   <FormCheck.Input
                     checked={filters.evenEmpty}
@@ -41,13 +42,22 @@ class Home extends Component {
                   <span>Exibir ações com preço em branco</span>
                 </label>
               </div>
-              <div className="col-6">
+              <div className="col-4">
                 <label className="form-check">
                   <FormCheck.Input
                     checked={filters.justThreeFour}
                     onChange={() => this._toggleFilter('justThreeFour')}
                   />
                   <span>Apenas com final 3 e 4</span>
+                </label>
+              </div>
+              <div className="col-4">
+                <label className="form-check">
+                  <FormCheck.Input
+                    checked={filters.showCharts}
+                    onChange={() => this._toggleFilter('showCharts')}
+                  />
+                  <span>Exibir gráficos</span>
                 </label>
               </div>
               <div className="col-sm-12 col-md-8">
@@ -85,7 +95,12 @@ class Home extends Component {
   }
 
   _getData = () => {
-    const { evenEmpty, justThreeFour, activity } = this.state.filters
+    const {
+      evenEmpty,
+      justThreeFour,
+      activity,
+      showCharts
+    } = this.state.filters
     const { list } = this.props.company
     let rows = []
     list.forEach(item => {
@@ -143,9 +158,11 @@ class Home extends Component {
         </div>
       )
       let chart = null
-      let chartWeekly = null
-      let chartMonthly = null
-      if (item.screenshot && item.screenshot.url) {
+      if (
+        item.screenshot &&
+        item.screenshot.url &&
+        showCharts
+      ) {
         const fullScreenshot = `${api.getURL()}${item.screenshot.url}`
         const fullScreenshotWeekly = `${api.getURL()}${item.screenshot.url_weekly}`
         const fullScreenshotMonthly = `${api.getURL()}${item.screenshot.url_monthly}`
@@ -153,29 +170,33 @@ class Home extends Component {
         screenshotDate = screenshotDate.toLocaleString()
         chart = (
           <div className="company-chart">
-            <img
-              src={fullScreenshot}
-              alt={`Data do screenshot: ${screenshotDate}`}
-              title={`Data do screenshot: ${screenshotDate}`}
-            />
-          </div>
-        )
-        chartWeekly = (
-          <div className="company-chart">
-            <img
-              src={fullScreenshotWeekly}
-              alt={`Data do screenshot: ${screenshotDate}`}
-              title={`Data do screenshot: ${screenshotDate}`}
-            />
-          </div>
-        )
-        chartMonthly = (
-          <div className="company-chart">
-            <img
-              src={fullScreenshotMonthly}
-              alt={`Data do screenshot: ${screenshotDate}`}
-              title={`Data do screenshot: ${screenshotDate}`}
-            />
+            <div className="company-chart__item">
+              <p className="company-chart__item__title">Diário</p>
+              <img
+                className="company-chart__item__image"
+                src={fullScreenshot}
+                alt={`Data do screenshot: ${screenshotDate}`}
+                title={`Data do screenshot: ${screenshotDate}`}
+              />
+            </div>
+            <div className="company-chart__item">
+              <p className="company-chart__item__title">Semanal</p>
+              <img
+                className="company-chart__item__image"
+                src={fullScreenshotWeekly}
+                alt={`Data do screenshot: ${screenshotDate}`}
+                title={`Data do screenshot: ${screenshotDate}`}
+              />
+            </div>
+            <div className="company-chart__item">
+              <p className="company-chart__item__title">Mensal</p>
+              <img
+                className="company-chart__item__image"
+                src={fullScreenshotMonthly}
+                alt={`Data do screenshot: ${screenshotDate}`}
+                title={`Data do screenshot: ${screenshotDate}`}
+              />
+            </div>
           </div>
         )
       }
@@ -189,8 +210,6 @@ class Home extends Component {
         p_vp: pVp,
         updated,
         chart,
-        chartWeekly,
-        chartMonthly,
         links,
         activity: item.activity
       })
@@ -258,16 +277,8 @@ class Home extends Component {
         field: 'updated',
         sort: 'asc'
       }, {
-        label: 'Gráfico diário',
+        label: 'Gráficos',
         field: 'chart',
-        sort: 'asc'
-      }, {
-        label: 'Gráfico semanal',
-        field: 'chart_weekly',
-        sort: 'asc'
-      }, {
-        label: 'Gráfico mensal',
-        field: 'chart_monthly',
         sort: 'asc'
       }, {
         label: 'Links',

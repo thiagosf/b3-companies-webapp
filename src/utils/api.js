@@ -15,7 +15,8 @@ const api = {
       process.env.NODE_ENV === 'development' ||
       process.env.NODE_ENV === 'test'
     ) {
-      url = 'http://localhost:3000'
+      // url = 'http://localhost:3000'
+      url = 'https://api.b3-companies.thiagosf.net'
     } else {
       url = 'https://api.b3-companies.thiagosf.net'
     }

@@ -42,7 +42,17 @@
   color: #F44336;
 }
 
-.company-chart img {
+.company-chart .company-chart__item {
+  margin: 0 0 10px 0;
+  background: #ddd;
+  padding: 10px;
+}
+.company-chart .company-chart__item__title {
+  margin: 0 0 5px 0;
+  font-size: 14px;
+  font-style: italic;
+}
+.company-chart .company-chart__item__image {
   width: 400px;
   display: block;
 }
